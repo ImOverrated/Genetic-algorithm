@@ -74,23 +74,23 @@ def evol_population(population):
 
 	# Random mutation
 	for individual in parents:
-		if random() < CHANCE_TO_MUTATE:
+		if(random() < CHANCE_TO_MUTATE):
 			place_to_modify = random.randint(0, MAX_SCORE)
-	        individual[place_to_modify] = get_random_char()
+			individual[place_to_modify] = get_random_char()
 
     # Crossover parent to create child
-    parents_len = len(parents)
-    desired_len = POPULATION_SIZE - parents_len
-    children = []
-    while(len(children) != desired_len):
-    	father = random.choice(parents)
-    	mother = random.choice(parents)
+	parents_len = len(parents)
+	desired_len = POPULATION_SIZE - parents_len
+	children = []
+	while(len(children) != desired_len):
+		father = random.choice(parents)
+		mother = random.choice(parents)
 
-    	child = father[:LEFT_LENGTH] + mother[RIGHT_LENGTH:]
-    	children.append(child)
+		child = father[:LEFT_LENGTH] + mother[RIGHT_LENGTH:]
+		children.append(child)
 
-    parents.extend(children)
-    return parents, solution
+	parents.extend(children)
+	return parents, solution
 
 
 def main():
@@ -107,28 +107,29 @@ def main():
 		population, average_score, solution = evol_population(population)
 		if i == 255:
 			print("Current score : " +average_score)
-		if i = 31
+		if i == 31:
 			log_avg.append(average_score)
 
 	# Generation de l'évolution du score de la population
 	line_chart = pygal.Line(show_dots=False, show_legend=False)
-    line_chart.title = 'Score evolution'
-    line_chart.x_title = 'Generations'
-    line_chart.y_title = 'Score'
-    line_chart.add('Score', log_avg)
-    line_chart.render_to_file('bar_chart.svg')
+	line_chart.title = "Score evolution"
+	line_chart.x_title = "Generations"
+	line_chart.y_title = "Score"
+	line_chart.add("Score", log_avg)
+	line_chart.render_to_file("bar_chart.svg")
 
-    final_average_score = average_population_score(population)
- 	print("Final Score : " + final_average_scores)
+	final_average_score = average_population_score(population)
+	print("Final Score : " + final_average_scores)
 
- 	if solution:
- 		print("Solution found (%d times) after %d generations." % (len(solution), i))
- 	else:
- 		print("No solution found after %d generations." % i)
-        print("- Last population was:")
-        for number, individual in enumerate(population):
-            print(number, '->',  ''.join(individual))
+	if solution:
+		print("Solution found (%d times) after %d generations." % (len(solution), i))
+	else:
+		print("No solution found after %d generations." % i)
+		print("- Last population was:")
+		for number, individual in enumerate(population):
+			print(number, '->',  ''.join(individual))
 
 	#print(order_population_by_score(generate_population()))
 
 main()
+			
